@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema({
+const teacherSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -19,6 +19,12 @@ const userSchema = new Schema({
     type: String,
     default: "/images/let-us-travel.jpg",
   },
+  subject: { type: Schema.Types.ObjectId, ref: "Subject" },
+  location: String,
+  price: {
+    type: Number,
+    required: true,
+  },
 });
 
-module.exports = model("User", userSchema);
+module.exports = model("Teacher", teacherSchema);
