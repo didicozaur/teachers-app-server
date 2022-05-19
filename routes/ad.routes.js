@@ -7,7 +7,8 @@ const Ad = require("../models/Ad.model");
 
 //  POST  -  Creates a new ad
 router.post("/ads", (req, res, next) => {
-  const { title, subject, description, location, price, user } = req.body;
+  const { title, subject, description, location, price, user, levels } =
+    req.body;
 
   Ad.create({
     title,
@@ -15,6 +16,7 @@ router.post("/ads", (req, res, next) => {
     location,
     price,
     user,
+    levels,
   })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
