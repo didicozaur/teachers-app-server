@@ -8,10 +8,6 @@ const subjectSchema = new Schema({
     unique: true,
   },
   description: String,
-  level: {
-    type: String,
-    enum: ["Beginner", "Intermediate", "Advanced"],
-  },
   img: {
     type: String,
     default: "/images/let-us-travel.jpg",

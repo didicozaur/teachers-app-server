@@ -2,9 +2,21 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const adSchema = new Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true,
+  },
   subject: { type: Schema.Types.ObjectId, ref: "Subject" },
-  description: String,
+  levels: [
+    {
+      type: String,
+      enum: ["Beginner", "Intermediate", "Advanced"],
+    },
+  ],
+  description: {
+    type: String,
+    required: true,
+  },
   location: String,
   user: { type: Schema.Types.ObjectId, ref: "User" },
   price: {
