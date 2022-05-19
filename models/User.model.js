@@ -19,6 +19,10 @@ const userSchema = new Schema({
     type: String,
     default: "/images/let-us-travel.jpg",
   },
+  role: {
+    type: String,
+    enum: ["student", "teacher"],
+  },
 });
 
 module.exports = model("User", userSchema);
