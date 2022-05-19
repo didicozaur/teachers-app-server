@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const { default: mongoose } = require("mongoose");
-
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 const Subject = require("../models/Subject.model");
 const User = require("../models/User.model");
 const Ad = require("../models/Ad.model");
 
 //  POST  -  Creates a new ad
-router.post("/ads", (req, res, next) => {
+router.post("/ads", isAuthenticated, (req, res, next) => {
   const { title, subject, description, location, price, user, levels } =
     req.body;
 
@@ -58,7 +58,7 @@ router.get("/ads/:adId", (req, res, next) => {
 });
 
 // Updates a specific project by id
-router.put("/ads/:adId", (req, res, next) => {
+router.put("/ads/:adId", isAuthenticated, (req, res, next) => {
   const { adId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(adId)) {
@@ -78,7 +78,7 @@ router.put("/ads/:adId", (req, res, next) => {
 });
 
 // Delete a specific project by id
-router.delete("/ads/:adId", (req, res, next) => {
+router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
   const { adId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(adId)) {

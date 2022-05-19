@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const { default: mongoose } = require("mongoose");
-
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 const Subject = require("../models/Subject.model");
 const Ad = require("../models/Ad.model");
 
 //  POST   -  Creates a new suject
-router.post("/subjects", (req, res, next) => {
+router.post("/subjects", isAuthenticated, (req, res, next) => {
   const { title, description, level, img } = req.body;
 
   Subject.create({ title, description, level, img })
