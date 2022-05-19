@@ -31,9 +31,6 @@ app.use("/api/auth", require("./routes/auth.routes"));
 const subjectRouter = require("./routes/subject.routes");
 app.use("/api", subjectRouter);
 
-const teacherRouter = require("./routes/teacher.routes");
-app.use("/api", teacherRouter);
-
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
