@@ -6,9 +6,9 @@ const Ad = require("../models/Ad.model");
 
 //  POST   -  Creates a new suject
 router.post("/subjects", isAuthenticated, (req, res, next) => {
-  const { title, description, level, img } = req.body;
+  const { title, description, img } = req.body;
 
-  Subject.create({ title, description, level, img })
+  Subject.create({ title, description, img })
     .then((response) => res.json(response))
     .catch((err) => res.json(err));
 });

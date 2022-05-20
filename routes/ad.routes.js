@@ -7,12 +7,13 @@ const Ad = require("../models/Ad.model");
 
 //  POST  -  Creates a new ad
 router.post("/ads", isAuthenticated, (req, res, next) => {
-  const { title, subject, description, location, price, user, levels } =
+  const { title, subject, description, experience, location, price, user, levels } =
     req.body;
 
   Ad.create({
     title,
     description,
+    experience,
     location,
     price,
     user,

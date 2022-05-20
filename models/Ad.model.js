@@ -13,6 +13,10 @@ const adSchema = new Schema({
       enum: ["Beginner", "Intermediate", "Advanced"],
     },
   ],
+  experience: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
     required: true,
