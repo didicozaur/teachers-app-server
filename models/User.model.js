@@ -17,7 +17,7 @@ const userSchema = new Schema({
   },
   img: {
     type: String,
-    default: "/images/let-us-travel.jpg",
+    default: "/images/learn-today.jpeg",
   },
 });
 

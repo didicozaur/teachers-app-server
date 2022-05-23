@@ -10,7 +10,7 @@ const subjectSchema = new Schema({
   description: String,
   img: {
     type: String,
-    default: "/images/let-us-travel.jpg",
+    default: "/images/learn-today.jpeg",
   },
 });
 
