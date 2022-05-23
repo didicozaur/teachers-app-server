@@ -5,7 +5,7 @@ const Subject = require("../models/Subject.model");
 const Ad = require("../models/Ad.model");
 
 //  POST   -  Creates a new suject
-router.post("/subjects", isAuthenticated, (req, res, next) => {
+router.post("/subjects/add", isAuthenticated, (req, res, next) => {
   const { title, description, img } = req.body;
 
   Subject.create({ title, description, img })
