@@ -13,6 +13,7 @@ router.post("/ads", isAuthenticated, (req, res, next) => {
   Ad.create({
     title,
     description,
+    subject,
     experience,
     location,
     price,
@@ -25,7 +26,6 @@ router.post("/ads", isAuthenticated, (req, res, next) => {
 
 // Get list of projects
 router.get("/ads", (req, res, next) => {
-  console.log('inside all ads page')
   Ad.find()
     .then((response) => {
       res.json(response);
@@ -41,9 +41,7 @@ router.get("/ads", (req, res, next) => {
 
 //  Get details of a specific ad by id
 router.get("/ads/:adId", (req, res, next) => {
-  console.log('inside ad details page')
   const { adId } = req.params;
-  console.log("hey there")
 
   if (!mongoose.Types.ObjectId.isValid(adId)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -52,8 +50,6 @@ router.get("/ads/:adId", (req, res, next) => {
 
   Ad.findById(adId)
     .then((ad) => {
-      console.log('>>>>>>>>>>>')
-      console.log(ad)
       res.json(ad)})
     .catch((err) => {
       console.log("error getting details of a ad", err);
@@ -65,45 +61,45 @@ router.get("/ads/:adId", (req, res, next) => {
 });
 
 // Updates a specific project by id
-// router.put("/ads/:adId", isAuthenticated, (req, res, next) => {
-//   const { adId } = req.params;
+router.put("/ads/:adId", isAuthenticated, (req, res, next) => {
+  const { adId } = req.params;
 
-//   if (!mongoose.Types.ObjectId.isValid(adId)) {
-//     res.status(400).json({ message: "Specified id is not valid" });
-//     return;
-//   }
+  if (!mongoose.Types.ObjectId.isValid(adId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
 
-//   Ad.findByIdAndUpdate(adId, req.body, { new: true })
-//     .then((updatedAd) => res.json(updatedAd))
-//     .catch((err) => {
-//       console.log("error updating the Ad", err);
-//       res.status(500).json({
-//         message: "error updating the ad",
-//         error: err,
-//       });
-//     });
-// });
+  Ad.findByIdAndUpdate(adId, req.body, { new: true })
+    .then((updatedAd) => res.json(updatedAd))
+    .catch((err) => {
+      console.log("error updating the Ad", err);
+      res.status(500).json({
+        message: "error updating the ad",
+        error: err,
+      });
+    });
+});
 
 // // Delete a specific project by id
-// router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
-//   const { adId } = req.params;
+router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
+  const { adId } = req.params;
 
-//   if (!mongoose.Types.ObjectId.isValid(adId)) {
-//     res.status(400).json({ message: "Specified id is not valid" });
-//     return;
-//   }
+  if (!mongoose.Types.ObjectId.isValid(adId)) {
+    res.status(400).json({ message: "Specified id is not valid" });
+    return;
+  }
 
-//   Ad.findByIdAndRemove(adId)
-//     .then((deteletedAd) => {
-//       console.log("Successfully deleted the Ad");
-//     })
-//     .catch((err) => {
-//       console.log("error deleting project", err);
-//       res.status(500).json({
-//         message: "error deleting project",
-//         error: err,
-//       });
-//     });
-// });
+  Ad.findByIdAndRemove(adId)
+    .then((deteletedAd) => {
+      console.log("Successfully deleted the Ad");
+    })
+    .catch((err) => {
+      console.log("error deleting project", err);
+      res.status(500).json({
+        message: "error deleting project",
+        error: err,
+      });
+    });
+});
 
 module.exports = router;
