@@ -8,10 +8,6 @@ const subjectSchema = new Schema({
     unique: true,
   },
   description: String,
-  img: {
-    type: String,
-    default: "/images/learn-today.jpeg",
-  },
 });
 
 module.exports = model("Subject", subjectSchema);
