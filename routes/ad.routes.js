@@ -6,9 +6,9 @@ const User = require("../models/User.model");
 const Ad = require("../models/Ad.model");
 
 //  POST  -  Creates a new ad
-router.post("/ads", isAuthenticated, (req, res, next) => {
-  const { title, subject, description, experience, location, price, levels } =
-    req.body;
+router.post("/ads/add", isAuthenticated, (req, res, next) => {
+  const { title, subject, description, experience, location, price} = req.body;
+
 
   Ad.create({
     title,
@@ -18,10 +18,12 @@ router.post("/ads", isAuthenticated, (req, res, next) => {
     location,
     price,
     user: req.payload._id,
-    levels,
   })
     .then((response) => res.json(response))
-    .catch((err) => res.json(err));
+    .catch((err) => {
+      console.log("error creating Ad....", err);
+      res.status(500).json(err)
+    });
 });
 
 // Get list of projects
@@ -85,7 +87,6 @@ router.put("/ads/:adId", isAuthenticated, (req, res, next) => {
 // // Delete a specific project by id
 router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
   const { adId } = req.params;
-  console.log(adId)
   
   if (!mongoose.Types.ObjectId.isValid(adId)) {
     res.status(400).json({ message: "Specified id is not valid" });
@@ -93,8 +94,8 @@ router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
   }
 
   Ad.findByIdAndRemove(adId)
-    .then((deteletedAd) => {
-      console.log("Successfully deleted the Ad");
+    .then((deletedAd) => {
+      res.json(deletedAd);
     })
     .catch((err) => {
       console.log("error deleting project", err);

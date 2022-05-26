@@ -7,15 +7,9 @@ const adSchema = new Schema({
     required: true,
   },
   subject: { type: Schema.Types.ObjectId, ref: "Subject" },
-  levels: [
-    {
-      type: String,
-      enum: ["Beginner", "Intermediate", "Advanced"],
-    },
-  ],
   experience: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
