@@ -27,6 +27,7 @@ router.post("/ads", isAuthenticated, (req, res, next) => {
 // Get list of projects
 router.get("/ads", (req, res, next) => {
   Ad.find()
+    .populate('subject')
     .then((response) => {
       res.json(response);
     })
@@ -49,6 +50,7 @@ router.get("/ads/:adId", (req, res, next) => {
   }
 
   Ad.findById(adId)
+  .populate("subject")
     .then((ad) => {
       res.json(ad)})
     .catch((err) => {
@@ -83,7 +85,8 @@ router.put("/ads/:adId", isAuthenticated, (req, res, next) => {
 // // Delete a specific project by id
 router.delete("/ads/:adId", isAuthenticated, (req, res, next) => {
   const { adId } = req.params;
-
+  console.log(adId)
+  
   if (!mongoose.Types.ObjectId.isValid(adId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
