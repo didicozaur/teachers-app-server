@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { default: mongoose } = require("mongoose");
 const User = require("../models/User.model");
 
 //get profile page of user
@@ -6,7 +7,7 @@ const User = require("../models/User.model");
 router.get("/users/:userId", (req, res, next) => {
   const { userId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(adId)) {
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
     res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
@@ -23,6 +24,5 @@ router.get("/users/:userId", (req, res, next) => {
       });
     });
 });
-
 
 module.exports = router;
