@@ -34,6 +34,9 @@ app.use("/api", subjectRouter);
 const adRouter = require("./routes/ad.routes");
 app.use("/api", adRouter);
 
+const userRouter = require("./routes/user.routes");
+app.use("/api", userRouter);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
